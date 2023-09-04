@@ -17,7 +17,7 @@ class CocktailController extends Controller
     }
 
     public function show(String $id){
-        $cocktail = CocktailfindOrFail($id);
+        $cocktail = Cocktail::findOrFail($id);
         return response()->json(
             $cocktail,
         );
