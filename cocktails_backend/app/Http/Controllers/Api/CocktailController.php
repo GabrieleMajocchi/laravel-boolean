@@ -9,10 +9,17 @@ use App\Models\Cocktail;
 class CocktailController extends Controller
 {
     public function index(){
+        $cocktails = Cocktail::paginate(5);
 
+        return response()->json(
+            $cocktails,
+        );
     }
 
     public function show(String $id){
-
+        $cocktail = CocktailfindOrFail($id);
+        return response()->json(
+            $cocktail,
+        );
     }
 }
