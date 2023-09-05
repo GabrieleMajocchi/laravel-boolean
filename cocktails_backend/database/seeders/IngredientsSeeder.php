@@ -15,8 +15,8 @@ class IngredientsSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i >= 616; $i++) {
-            $response = Http::withOptions(['verify' => false])->get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid='.$i);
+        for ($i = 1; $i <= 616; $i++) {
+            $response = Http::withOptions(['verify' => false])->get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=' . $i);
             $data = $response->json();
             $ingredient = $data['ingredients'][0];
 
@@ -26,6 +26,7 @@ class IngredientsSeeder extends Seeder
             $newIngredient->type = $ingredient['strType'];
             $newIngredient->save();
 
+            sleep(0.1);
         }
     }
 }
