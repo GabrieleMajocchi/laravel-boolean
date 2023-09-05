@@ -15,13 +15,17 @@ class IngredientsSeeder extends Seeder
      */
     public function run(): void
     {
-        $response = Http::withOptions(['verify' => false])->get('www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
-        $data = $response->json();
+        for ($i = 1; $i >= 616; $i++) {
+            $response = Http::withOptions(['verify' => false])->get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid='.$i);
+            $data = $response->json();
+            $ingredient = $data['ingredients'][0];
 
-        foreach($data['drinks'] as $ingredient){
             $newIngredient = new Ingredient();
-            $newIngredient->name = $ingredient['strIngredient1'];
+            $newIngredient->name = $ingredient['strIngredient'];
+            $newIngredient->description = $ingredient['strDescription'];
+            $newIngredient->type = $ingredient['strType'];
             $newIngredient->save();
+
         }
     }
 }
