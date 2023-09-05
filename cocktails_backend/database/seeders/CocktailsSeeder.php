@@ -30,7 +30,7 @@ class CocktailsSeeder extends Seeder
             $newCocktail->image = $drink['strDrinkThumb'];
             $newCocktail->save();
 
-            sleep(1);
+            sleep(0.1);
         }
     }
 }
