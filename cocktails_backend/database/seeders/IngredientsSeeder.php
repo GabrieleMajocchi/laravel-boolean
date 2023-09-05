@@ -20,7 +20,7 @@ class IngredientsSeeder extends Seeder
 
         foreach($data['drinks'] as $ingredient){
             $newIngredient = new Ingredient();
-            $newIngredient->name = $ingredient['strDrink'];
+            $newIngredient->name = $ingredient['strIngredient1'];
             $newIngredient->save();
         }
     }
