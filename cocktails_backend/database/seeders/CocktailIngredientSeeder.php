@@ -6,6 +6,7 @@ use App\Models\Cocktail;
 use App\Models\Ingredient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
 
 class CocktailIngredientSeeder extends Seeder
 {
@@ -14,6 +15,16 @@ class CocktailIngredientSeeder extends Seeder
      */
     public function run(): void
     {
+        $cocktails = Cocktail::all();
 
+        foreach($cocktails as $cocktail){
+            $response = Http::withOptions(['verify' => false])->get('www.thecocktaildb.com/api/json/v1/1/search.php?s=' . $cocktail['name']);
+            for($i = 1; $i <= 15; $i++){
+                if(!is_null($response['drinks'][0]['strIngredient' . $i])){
+                    $ingredient = Ingredient::where('name', '=', $response['drinks'][0]['strIngredient' . $i])->get();
+                    $cocktail->ingredients()->attach($ingredient->toArray()[0]['id']);
+                }
+            }
+        }
     }
 }
