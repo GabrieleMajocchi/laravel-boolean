@@ -10,7 +10,6 @@ class CocktailController extends Controller
 {
     public function index(){
         $cocktails = Cocktail::with('ingredients')->paginate(5);
-
         return response()->json(
             $cocktails,
         );
@@ -20,6 +19,13 @@ class CocktailController extends Controller
         $cocktail = Cocktail::with('ingredients')->findOrFail($id);
         return response()->json(
             $cocktail,
+        );
+    }
+
+    public function indexCategories(){
+        $categories = Cocktail::all()->pluck('category');
+        return response()->json(
+            $categories,
         );
     }
 }

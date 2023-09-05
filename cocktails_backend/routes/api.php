@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/cocktails', [CocktailController::class, 'index'])->name('api.cocktails.index');
+Route::get('/categories', [CocktailController::class, 'indexCategories'])->name('api.cocktails.indexCategories');
 Route::get('/cocktails/{cocktails}', [CocktailController::class, 'show'])->name('api.cocktails.show');
