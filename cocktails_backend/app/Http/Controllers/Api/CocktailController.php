@@ -28,4 +28,11 @@ class CocktailController extends Controller
             $categories,
         );
     }
+
+    public function searchCocktails(String $category){
+        $cocktails = Cocktail::with('ingredients')->where('category', '=', $category)->get();
+        return response()->json(
+            $cocktails,
+        );
+    }
 }

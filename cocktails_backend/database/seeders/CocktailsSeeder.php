@@ -23,7 +23,7 @@ class CocktailsSeeder extends Seeder
             $drink = $data['drinks'][0];
             $newCocktail = new Cocktail();
             $newCocktail->name = $drink['strDrink'];
-            $newCocktail->category = $drink['strCategory'];
+            $newCocktail->category = str_replace('/', '-', $drink['strCategory']);
             $newCocktail->alcoholic = $drink['strAlcoholic'];
             $newCocktail->glass = $drink['strGlass'];
             $newCocktail->instructions = $drink['strInstructions'];
