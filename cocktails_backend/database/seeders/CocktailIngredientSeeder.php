@@ -22,7 +22,10 @@ class CocktailIngredientSeeder extends Seeder
             for($i = 1; $i <= 15; $i++){
                 if(!is_null($response['drinks'][0]['strIngredient' . $i])){
                     $ingredient = Ingredient::where('name', '=', $response['drinks'][0]['strIngredient' . $i])->get();
-                    $cocktail->ingredients()->attach($ingredient->toArray()[0]['id']);
+                    $ingredientArray = $ingredient->toArray();
+                        if (!empty($ingredientArray)) {
+                            $cocktail->ingredients()->attach($ingredientArray[0]['id']);
+                        }
                 }
             }
         }
